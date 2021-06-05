@@ -1,0 +1,14 @@
+{
+	"Targets": [
+		{
+			"Name": "El",
+			"Path": "D:\\Other\\El\\El\\Source\\El.Target.cs",
+			"Type": "Game"
+		},
+		{
+			"Name": "ElEditor",
+			"Path": "D:\\Other\\El\\El\\Source\\ElEditor.Target.cs",
+			"Type": "Editor"
+		}
+	]
+}
