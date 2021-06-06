@@ -1,15 +1,16 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "ElMenuHUD.h"
+#include "UI/HUD/ElMenuHUD.h"
 
-#include "Widget/SElMenuWidget.h"
+#include "UI/Widget/SElMenuHUDWidget.h"
 #include "Widgets/SWeakWidget.h"
 AElMenuHUD::AElMenuHUD()
 {
 	if (GEngine&&GEngine->GameViewport)
 	{
-		SAssignNew(MenuHUDWidget, SElMenuWidget);
+		SAssignNew(MenuHUDWidget, SElMenuHUDWidget);
 		GEngine->GameViewport->AddViewportWidgetContent(SNew(SWeakWidget).PossiblyNullContent(MenuHUDWidget.ToSharedRef()));
+		//UE_LOG(LogTemp,Warning,TEXT("InitAElMenuHUD"));
 	}
 }

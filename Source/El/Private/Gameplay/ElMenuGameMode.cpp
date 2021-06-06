@@ -1,10 +1,9 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "ElMenuGameMode.h"
-
-#include "ElMenuPlayerController.h"
-#include "El/HUD/ElMenuHUD.h"
+#include "Gameplay/ElMenuGameMode.h"
+#include "Gameplay/ElMenuPlayerController.h"
+#include "UI/HUD/ElMenuHUD.h"
 
 AElMenuGameMode::AElMenuGameMode()
 {
