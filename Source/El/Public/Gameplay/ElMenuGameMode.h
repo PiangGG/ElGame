@@ -16,4 +16,6 @@ class EL_API AElMenuGameMode : public AGameModeBase
 public:
 	//游戏模式构造函数|菜单游戏模式
 	AElMenuGameMode();
+	
+	virtual void BeginPlay() override;
 };

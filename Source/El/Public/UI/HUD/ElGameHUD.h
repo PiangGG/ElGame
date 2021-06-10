@@ -3,16 +3,15 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Engine/GameInstance.h"
-#include "ElGI.generated.h"
+#include "GameFramework/HUD.h"
+#include "ElGameHUD.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class EL_API UElGI : public UGameInstance
+class EL_API AElGameHUD : public AHUD
 {
 	GENERATED_BODY()
-public:
-	UElGI();
+	
 };

@@ -52,3 +52,13 @@ namespace EMenuButtonType
 		BackMainMenu
 	};
 }
+
+namespace EControllerState
+{
+	enum Type
+	{
+		GameOnly,
+		UIOnly,
+		GameAndUI
+	};
+}

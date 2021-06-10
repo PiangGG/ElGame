@@ -2,6 +2,8 @@
 
 
 #include "Gameplay/ElMenuGameMode.h"
+
+#include "Common/ElHelper.h"
 #include "Gameplay/ElMenuPlayerController.h"
 #include "UI/HUD/ElMenuHUD.h"
 
@@ -11,4 +13,12 @@ AElMenuGameMode::AElMenuGameMode()
 	PlayerControllerClass = AElMenuPlayerController::StaticClass();
 	//HUD
 	HUDClass=AElMenuHUD::StaticClass();
+}
+
+void AElMenuGameMode::BeginPlay()
+{
+	if (Cast<AElMenuPlayerController>( GetWorld()->GetFirstPlayerController()))
+	{
+		Cast<AElMenuPlayerController>( GetWorld()->GetFirstPlayerController())->ChangeControllerState(EControllerState::UIOnly);
+	}
 }

@@ -15,5 +15,7 @@ UCLASS()
 class EL_API AElGMInGame : public AElGameModeBase
 {
 	GENERATED_BODY()
-	
+public:
+	AElGMInGame();
+	virtual void BeginPlay() override;
 };
