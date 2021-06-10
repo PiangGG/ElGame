@@ -10,7 +10,7 @@ AElMenuHUD::AElMenuHUD()
 	if (GEngine&&GEngine->GameViewport)
 	{
 		SAssignNew(MenuHUDWidget, SElMenuHUDWidget);
-		GEngine->GameViewport->AddViewportWidgetContent(SNew(SWeakWidget).PossiblyNullContent(MenuHUDWidget.ToSharedRef()));
+		GEngine->GameViewport->AddViewportWidgetContent(SNew(SWeakWidget).PossiblyNullContent(MenuHUDWidget));
 		//UE_LOG(LogTemp,Warning,TEXT("InitAElMenuHUD"));
 	}
 }

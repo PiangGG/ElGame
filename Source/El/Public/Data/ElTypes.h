@@ -9,7 +9,7 @@
  */
 //语言枚举
 UENUM()
-enum class ECultureTeam:uint8
+enum class ELanguage:uint8
 {
 	EN=0,
 	ZH
@@ -23,7 +23,7 @@ namespace EMenuItem
 	};
 }
 
-namespace GameMainState
+namespace EGameMainState
 {
 	enum Type
 	{
@@ -33,7 +33,7 @@ namespace GameMainState
 		GameSetting
 	};
 }
-namespace InGameMenuState
+namespace EInGameMenuState
 {
 	enum Type
 	{
@@ -48,6 +48,7 @@ namespace EMenuButtonType
 		None,
 		StartGame,
 		GameSetting,
-		QuitGame
+		QuitGame,
+		BackMainMenu
 	};
 }

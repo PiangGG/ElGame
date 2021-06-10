@@ -11,6 +11,8 @@ class EL_API ElJsonHandle
 {
 public:
 	ElJsonHandle();
+	//解析存档方法
+	void GameSettingJsonRead(FString &Language,TArray<FString>& Languages);
 private:
 	//读取Json文件到字符串
 	bool LoadStringFromFile(const FString& FileName,const FString& RelaPath,FString& ResultString);
@@ -23,4 +25,6 @@ private:
 private:
 	//相对路径
 	FString RelativePath;
+	//存档文件名
+	FString GameSettingFileName;
 };

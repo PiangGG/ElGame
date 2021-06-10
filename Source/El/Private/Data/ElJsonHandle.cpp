@@ -7,7 +7,32 @@
 
 ElJsonHandle::ElJsonHandle()
 {
-	RelativePath = FString("Res/ConfigData/");
+	RelativePath = FString("Res/Config/");
+	GameSettingFileName =FString("GameSet.json");
+}
+
+void ElJsonHandle::GameSettingJsonRead(FString &Language,TArray<FString>& Languages)
+{
+	FString JsonValue;
+	LoadStringFromFile(GameSettingFileName,RelativePath,JsonValue);
+	TArray<TSharedPtr<FJsonValue>> JsonParsed;
+	TSharedRef<TJsonReader<TCHAR>> JsonReader = TJsonReaderFactory<TCHAR>::Create(JsonValue);
+	//解析
+	if (FJsonSerializer::Deserialize(JsonReader,JsonParsed))
+	{
+		//獲取默認語言設置
+		Language=JsonParsed[0]->AsObject()->GetStringField(FString("Language"));
+		//獲取語言設置Option
+		TArray<TSharedPtr<FJsonValue>> LanguageArray = JsonParsed[1]->AsObject()->GetArrayField(FString("Languages"));
+		for (int i=0;i<LanguageArray.Num();++i)
+		{
+			FString thisLanguage= LanguageArray[i]->AsObject()->GetStringField(FString::FromInt(i));
+			Languages.Add(thisLanguage);
+		}
+	}else
+	{
+		ElHelper::Debug(FString("GameSettingFileName not can read!"));
+	}
 }
 
 bool ElJsonHandle::LoadStringFromFile(const FString& FileName, const FString& RelaPath, FString& ResultString)
