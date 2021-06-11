@@ -10,10 +10,11 @@ AElController::AElController()
 	CurrControllerState=EControllerState::UIOnly;
 }
 
-void AElController::ChangeControllerState(EControllerState::Type type)
+void AElController::ChangeControllerState(EControllerState::Type newtype)
 {
-	//if (CurrControllerState==type)return;
-	switch (type)
+	/*if (CurrControllerState==newtype)return;
+	CurrControllerState=newtype;*/
+	switch (newtype)
 	{
 	case EControllerState::GameOnly:
 		GameOnlyState();
@@ -26,25 +27,27 @@ void AElController::ChangeControllerState(EControllerState::Type type)
 		break;
 	default: break;
 	}
-	CurrControllerState=type;
 }
 void AElController::GameOnlyState()
 {
-	this->SetShowMouseCursor(false);
-	SetInputMode(FInputModeGameOnly());
+	if (GWorld&&GWorld->GetFirstPlayerController())
+	{
+		GWorld->GetFirstPlayerController()->SetShowMouseCursor(false);
+		GWorld->GetFirstPlayerController()->SetInputMode(FInputModeGameOnly());
+	}
 	return;
 }
 
 void AElController::UIOnlyState()
 {
-	this->SetShowMouseCursor(true);
-	SetInputMode(FInputModeUIOnly());
+	GWorld->GetFirstPlayerController()->SetShowMouseCursor(true);
+	GWorld->GetFirstPlayerController()->SetInputMode(FInputModeUIOnly());
 	return;
 }
 
 void AElController::GameAndUIState()
 {
-	this->SetShowMouseCursor(true);
+	GWorld->GetFirstPlayerController()->SetShowMouseCursor(true);
 	SetInputMode(FInputModeGameAndUI());
 	return;
 }

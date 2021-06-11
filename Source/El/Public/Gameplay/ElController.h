@@ -3,7 +3,6 @@
 #pragma once
 
 #include "CoreMinimal.h"
-
 #include "Data/ElTypes.h"
 #include "GameFramework/PlayerController.h"
 #include "ElController.generated.h"
@@ -19,9 +18,9 @@ class EL_API AElController : public APlayerController
 public:
 	AElController();
 
-	EControllerState::Type CurrControllerState=EControllerState::UIOnly;
+	EControllerState::Type CurrControllerState;
 
-	void ChangeControllerState(EControllerState::Type type);
+	void ChangeControllerState(EControllerState::Type newtype);
 
 	void GameOnlyState();
 
