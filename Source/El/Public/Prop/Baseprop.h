@@ -26,7 +26,16 @@ protected:
 	UFUNCTION()
 	void OnOverlayEnd(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
+	
+	void UpdateInfoWidget(FVector Loaction);
+public:
+	
+	virtual void DoSomethingStart();
+	virtual void DoSomethingEnd();
+	virtual void DoSomethinging(float speed);
 
+	virtual void InPower(float Speed);
+	virtual void OutPower(float Speed);
 public:
 	//跟组件
 	class USceneComponent* RootComp;
@@ -34,4 +43,22 @@ public:
 	class UStaticMeshComponent* BaseMesh;
 	//碰撞体
 	class UBoxComponent* BoxComp;
+	
+	class UPropWidgetComponent*WidgetComp;
+
+ 	TSharedPtr<class SElUserInfoWidget>InfoWidget;
+
+	class UBatteryComponent* BatteryComp;
+	
+	bool bOverlap = false;
+
+	class AElCharacter*OverlapCharacter;
+
+	bool bDosomething = false;
+
+	bool bUsePower;
+
+	bool bInPower=false;
+	
+    FVector	ActorScale3D=FVector(1.0f);
 };

@@ -28,10 +28,13 @@ public:
 	//PlayMotage
 public:
 
-	UPROPERTY(EditAnywhere,Category=AnimaCharactre)
+	UPROPERTY(BlueprintReadWrite,Category=AnimaCharactre)
 	float Speed;
-	UPROPERTY(EditAnywhere,Category=AnimaCharactre)
+	UPROPERTY(BlueprintReadWrite,Category=AnimaCharactre)
 	bool IsFail;
-	UPROPERTY(EditAnywhere,Category=AnimaCharactre)
+	UPROPERTY(BlueprintReadWrite,Category=AnimaCharactre)
+	bool IsCrouch;
+	UPROPERTY(BlueprintReadWrite,Category=AnimaCharactre)
 	class AElCharacter *ElCharacter;
+	
 };
