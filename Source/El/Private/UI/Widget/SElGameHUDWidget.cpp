@@ -109,6 +109,8 @@ void SElGameHUDWidget::GameButtonOnClicked(EMenuButtonType::Type ButtonType)
 	case EMenuButtonType::ReStartGame:
 		ReStartGame_OnClick();
 		break;
+	case EMenuButtonType::NextMap:
+		NextMap_OnClick();
 	default: break;
 	}
 }
@@ -147,7 +149,7 @@ void SElGameHUDWidget::GameState_None()
 	}
 	if (GemeCompleteWidget)
 	{
-		GemeOptionWidget->SetVisibility(EVisibility::Hidden);
+		GemeCompleteWidget->SetVisibility(EVisibility::Hidden);
 	}
 }
 
@@ -168,7 +170,7 @@ void SElGameHUDWidget::GameState_Option()
 	}
 	if (GemeCompleteWidget)
 	{
-		GemeOptionWidget->SetVisibility(EVisibility::Hidden);
+		GemeCompleteWidget->SetVisibility(EVisibility::Hidden);
 	}
 }
 
@@ -216,6 +218,17 @@ void SElGameHUDWidget::QuiGame_OnClick()
 	if (UGameplayStatics::GetPlayerController(GWorld,0))
 	{
 		Cast<AElPlayerController>(UGameplayStatics::GetPlayerController(GWorld,0))->ConsoleCommand("quit");
+	}
+}
+
+void SElGameHUDWidget::NextMap_OnClick()
+{
+
+	UElGI *GI=Cast<UElGI>(UGameplayStatics::GetGameInstance(GWorld));
+	if (GI->GetCurrentMapID()<17)
+	{
+		ChangeGameHUDState(EGameHUDState::None);
+		UGameplayStatics::OpenLevel(GWorld,FName("Map"+FString::FromInt(GI->GetCurrentMapID()+1)));
 	}
 }
 

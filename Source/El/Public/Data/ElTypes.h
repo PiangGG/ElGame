@@ -52,7 +52,8 @@ namespace EMenuButtonType
 		BackMainMenu,
 		GameOption,
 		BackGame,
-		ReStartGame
+		ReStartGame,
+		NextMap
 	};
 }
 

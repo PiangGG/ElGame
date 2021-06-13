@@ -39,6 +39,8 @@ public:
 	void BackMainMenu_OnClick();
 
 	void QuiGame_OnClick();
+	
+	void NextMap_OnClick();
 
 
 public:

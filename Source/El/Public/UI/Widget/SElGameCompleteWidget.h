@@ -3,6 +3,8 @@
 #pragma once
 
 #include "CoreMinimal.h"
+
+#include "Data/ElTypes.h"
 #include "Widgets/SCompoundWidget.h"
 
 /**
@@ -18,7 +20,14 @@ public:
 	/** Constructs this widget with InArgs */
 	void Construct(const FArguments& InArgs);
 
+	void MenuButtonOnClicked(EMenuButtonType::Type ButtonType);
+	
 private:
 	//引入Sytle|获取GameStyle
 	const struct FElGameStyle* GameStyle;
+	TSharedPtr<class SUniformGridPanel> GameOptionGridPanel;
+	TSharedPtr<class SButtonWidget> NextMapButton;
+	TSharedPtr<class SButtonWidget> ReStartGameButton;
+	TSharedPtr<class SButtonWidget> BackMainMenuButton;
+	TSharedPtr<class SButtonWidget> QuiGameButton;
 };

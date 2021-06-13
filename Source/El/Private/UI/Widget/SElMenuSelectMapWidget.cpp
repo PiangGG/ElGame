@@ -50,7 +50,7 @@ void SElMenuSelectMapWidget::Construct(const FArguments& InArgs)
 			[
 				SNew(STextBlock)
 				.Text(NSLOCTEXT("ElMenu","SelecMap","SelecMap"))
-				//.Font()
+				.Font(MenuStyle->MenuFontInfo)
 			]
 			+SOverlay::Slot()
 			.VAlign(VAlign_Bottom)
