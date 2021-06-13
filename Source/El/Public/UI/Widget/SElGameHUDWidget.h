@@ -3,6 +3,8 @@
 #pragma once
 
 #include "CoreMinimal.h"
+
+#include "Data/ElTypes.h"
 #include "Widgets/SCompoundWidget.h"
 
 /**
@@ -17,10 +19,41 @@ public:
 
 	/** Constructs this widget with InArgs */
 	void Construct(const FArguments& InArgs);
+	
+	void GameButtonOnClicked(EMenuButtonType::Type ButtonType);
+
+	void ChangeGameHUDState(EGameHUDState::Type GameHUDState);
+
+	void GameState_None();
+	
+	void GameState_Option();
+
+	void GameState_Complete();
+	
+	void GameOption_OnClick();
+	
+	void BackGame_OnClick();
+	
+	void ReStartGame_OnClick();
+	
+	void BackMainMenu_OnClick();
+
+	void QuiGame_OnClick();
+
 
 public:
 	TSharedPtr<class SElUserInfoWidget> ElUserInfoWidget;
+
+	TSharedPtr<class SButtonWidget> OptionButton;
+	
+	TSharedPtr<class SGemeOptionWidget> GemeOptionWidget;
+	TSharedPtr<class SElGameCompleteWidget> GemeCompleteWidget;
 private:
 	//引入Sytle|获取GameStyle
 	const struct FElGameStyle* GameStyle;
+
+	EGameHUDState::Type CurrenGameHUDState=EGameHUDState::None;
+
+	EVisibility bOptionVisibility=EVisibility::Visible;
 };
+

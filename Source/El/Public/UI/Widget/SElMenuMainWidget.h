@@ -34,5 +34,7 @@ private:
 	TSharedPtr<SButtonWidget> QuitGameMapButton;
 	//垂直框|用来保存垂直列表
 	TSharedPtr<SVerticalBox>ContentBox;
+
+	TSharedPtr<class SUniformGridPanel> MenuGridPanel;
 	
 };

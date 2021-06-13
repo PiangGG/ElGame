@@ -15,4 +15,10 @@ class EL_API UElGI : public UGameInstance
 	GENERATED_BODY()
 public:
 	UElGI();
+
+	int GetCurrentMapID();
+	
+	void SetCurrentMapID(int ID);
+private:
+	int CurrentMapID;
 };

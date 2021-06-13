@@ -15,6 +15,7 @@ class EL_API AElGameHUD : public AHUD
 	GENERATED_BODY()
 
 	public:
+	
 	AElGameHUD();
 	TSharedPtr<class SElGameHUDWidget> GameHUDWidget;
 	virtual void Tick(float DeltaSeconds) override;

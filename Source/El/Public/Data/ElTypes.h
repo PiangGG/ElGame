@@ -49,7 +49,10 @@ namespace EMenuButtonType
 		StartGame,
 		GameSetting,
 		QuitGame,
-		BackMainMenu
+		BackMainMenu,
+		GameOption,
+		BackGame,
+		ReStartGame
 	};
 }
 
@@ -60,5 +63,24 @@ namespace EControllerState
 		GameOnly,
 		UIOnly,
 		GameAndUI
+	};
+}
+
+namespace EGameState
+{
+	enum Type
+	{
+		None,
+		Playing,
+		Complate
+	};
+}
+namespace EGameHUDState
+{
+	enum Type
+	{
+		None,
+		Option,
+		Complete
 	};
 }

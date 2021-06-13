@@ -4,6 +4,7 @@
 #include "UI/Widget/SElMenuSelectMapWidget.h"
 #include "SlateOptMacros.h"
 #include "Common/ElHelper.h"
+#include "Gameplay/ElGI.h"
 #include "Kismet/GameplayStatics.h"
 #include "UI/HUD/ElMenuHUD.h"
 #include "UI/Style/ElMenuWidgetStyle.h"
@@ -56,10 +57,17 @@ void SElMenuSelectMapWidget::Construct(const FArguments& InArgs)
 			.HAlign(HAlign_Center)
 			.Padding(FMargin(0.0f,0.0f,0.0f,100.0f))
 			[
-				SAssignNew(BackMenuButton,SButtonWidget)
-				.MenuButtonType(EMenuButtonType::BackMainMenu)
-				.ButtonText(NSLOCTEXT("ElMenu","Back","Back"))
-				.OnClicked(this,&SElMenuSelectMapWidget::MenuButtonOnClicked)
+				SNew(SBox)
+				.HeightOverride(80.0f)
+				.WidthOverride(200.0f)
+				[
+					SAssignNew(BackMenuButton,SButtonWidget)
+					.MenuButtonType(EMenuButtonType::BackMainMenu)
+					.ButtonText(NSLOCTEXT("ElMenu","Back","Back"))
+					.ButtionImage(MenuStyle->TextBg)
+					.OnClicked(this,&SElMenuSelectMapWidget::MenuButtonOnClicked)
+				]
+				
 			]
 		]
 	];
@@ -97,13 +105,11 @@ void SElMenuSelectMapWidget::MenuButtonOnClicked(EMenuButtonType::Type type)
 void SElMenuSelectMapWidget::MenuSelectMapOnClicked(int id)
 {
 	ElHelper::Debug(FString::FromInt(id));
-	switch (id)
-	{
-	case 0:
-		UGameplayStatics::OpenLevel(GWorld,FName("Map0"));
-		break;
-	default: break;
-	}
+	
+	UElGI *GI=Cast<UElGI>(UGameplayStatics::GetGameInstance(GWorld));
+	GI->SetCurrentMapID(id);
+
+	UGameplayStatics::OpenLevel(GWorld,FName("Map"+FString::FromInt(GI->GetCurrentMapID())));
 }
 
 END_SLATE_FUNCTION_BUILD_OPTIMIZATION

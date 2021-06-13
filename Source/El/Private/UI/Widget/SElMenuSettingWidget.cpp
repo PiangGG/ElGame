@@ -9,9 +9,12 @@
 #include "Data/ElDataHandle.h"
 #include "Kismet/GameplayStatics.h"
 #include "UI/HUD/ElMenuHUD.h"
+#include "UI/Style/ElMenuWidgetStyle.h"
+#include "UI/Style/ElStyle.h"
 #include "UI/Widget/SButtonWidget.h"
 #include "UI/Widget/SElMenuHUDWidget.h"
 #include "UI/Widget/SElMenuMainWidget.h"
+#include "Widgets/Images/SImage.h"
 #include "Widgets/Input/STextComboBox.h"
 
 BEGIN_SLATE_FUNCTION_BUILD_OPTIMIZATION
@@ -23,49 +26,91 @@ void SElMenuSettingWidget::Construct(const FArguments& InArgs)
 	{
 		LanguageSetString.Add(MakeShareable(new FString(*It)));
 	}
-	//MenuStyle=&ElStyle::Get().GetWidgetStyle<FElMenuStyle>("BPElMenuStyle");
+	MenuStyle=&ElStyle::Get().GetWidgetStyle<FElMenuStyle>("BPElMenuStyle");
 	ChildSlot
 	[
 		// Populate the widget
-		SNew(SBox)
-		.HAlign(HAlign_Center)
-		.VAlign(VAlign_Center)
+		SNew(SOverlay)
+		+SOverlay::Slot()
+		.HAlign(HAlign_Fill)
+		.VAlign(VAlign_Fill)
 		[
-			SAssignNew(VerticalBox,SVerticalBox)
-			+SVerticalBox::Slot()
-			.VAlign(VAlign_Fill)
-			.HAlign(HAlign_Fill)
+			SNew(SBox)
+			.HAlign(HAlign_Center)
+			.VAlign(VAlign_Center)
 			[
-				SNew(SHorizontalBox)
-				+SHorizontalBox::Slot()
-				.HAlign(HAlign_Left)
-				.VAlign(VAlign_Center)
-				.Padding(FMargin(20))
+				SAssignNew(VerticalBox,SVerticalBox)
+				+SVerticalBox::Slot()
+				.VAlign(VAlign_Fill)
+				.HAlign(HAlign_Fill)
 				[
-					SNew(STextBlock)
-					.Text(NSLOCTEXT("ElMenu","Language","Language"))
-					.Margin(20)
-				]
-				+SHorizontalBox::Slot()
-				.HAlign(HAlign_Right)
-				.VAlign(VAlign_Center)
-				.Padding(FMargin(20))
-				[
-					SAssignNew(LanguageComboBox,STextComboBox)
-					//.Font(MenuStyle->Font_30)
-					.OptionsSource(&LanguageSetString)
-					.OnSelectionChanged(this,&SElMenuSettingWidget::LanguageSetStringOnSelectionChanged)
+					SNew(SHorizontalBox)
+					+SHorizontalBox::Slot()
+					.HAlign(HAlign_Fill)
+					.VAlign(VAlign_Fill)
+					.Padding(1.0f)
+					[
+						SNew(SBox)
+						.HeightOverride(80.0f)
+						.WidthOverride(200.0f)
+						[
+							SNew(SOverlay)
+							+SOverlay::Slot()
+							.HAlign(HAlign_Center)
+							.VAlign(VAlign_Center)
+							[
+								SNew(STextBlock)
+								.Text(NSLOCTEXT("ElMenu","Language","Language"))
+								.Font(MenuStyle->MenuFontInfo)
+							]
+							+SOverlay::Slot()
+							.HAlign(HAlign_Fill)
+							.VAlign(VAlign_Fill)
+							[
+								SNew(SImage)
+								.Image(&MenuStyle->TextBg)
+							]
+						]
+						
+					]
+					+SHorizontalBox::Slot()
+					.HAlign(HAlign_Fill)
+					.VAlign(VAlign_Center)
+					.Padding(1.0f)
+					[
+						SNew(SBox)
+						.HeightOverride(80.0f)
+						.WidthOverride(200.0f)
+						[
+							SAssignNew(LanguageComboBox,STextComboBox)
+							.OptionsSource(&LanguageSetString)
+							.ButtonStyle(&MenuStyle->ButtonStyle)
+							.Font(MenuStyle->MenuFontInfo)
+							.ColorAndOpacity(MenuStyle->TextComboBoxColor)
+							.OnSelectionChanged(this,&SElMenuSettingWidget::LanguageSetStringOnSelectionChanged)
+					
+						]
+					]
 				]
 			]
-			+SVerticalBox::Slot()
-			.VAlign(VAlign_Center)
-			.HAlign(HAlign_Center)
+		]
+		
+		+SOverlay::Slot()
+		.VAlign(VAlign_Bottom)
+		.HAlign(HAlign_Center)
+		.Padding(FMargin(0.0f,0.0f,0.0f,100.0f))
+		[
+			SNew(SBox)
+			.HeightOverride(80.0f)
+			.WidthOverride(200.0f)
 			[
 				SAssignNew(BackMenuButton,SButtonWidget)
 				.MenuButtonType(EMenuButtonType::BackMainMenu)
 				.ButtonText(NSLOCTEXT("ElMenu","Back","Back"))
+				.ButtionImage(MenuStyle->TextBg)
 				.OnClicked(this,&SElMenuSettingWidget::MenuButtonOnClicked)
 			]
+			
 		]
 	];
 	

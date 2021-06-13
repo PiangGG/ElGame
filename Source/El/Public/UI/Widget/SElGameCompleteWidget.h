@@ -5,31 +5,20 @@
 #include "CoreMinimal.h"
 #include "Widgets/SCompoundWidget.h"
 
-
 /**
  * 
  */
-class EL_API SElUserInfoWidget : public SCompoundWidget
+class EL_API SElGameCompleteWidget : public SCompoundWidget
 {
 public:
-	SLATE_BEGIN_ARGS(SElUserInfoWidget)
+	SLATE_BEGIN_ARGS(SElGameCompleteWidget)
 	{}
-	SLATE_ATTRIBUTE(float,size)
 	SLATE_END_ARGS()
 
 	/** Constructs this widget with InArgs */
 	void Construct(const FArguments& InArgs);
 
-	void UpdateProgressBar(float num);
-
-	void PowerButtonOnOnPressed();
-	void PowerButtonOnOnOnReleased();
 private:
 	//引入Sytle|获取GameStyle
 	const struct FElGameStyle* GameStyle;
-	TSharedPtr<class SProgressBar> ProgressBar;//电量
-	TSharedPtr<class SButton>PowerButton;
-	
-	float size;
 };
-

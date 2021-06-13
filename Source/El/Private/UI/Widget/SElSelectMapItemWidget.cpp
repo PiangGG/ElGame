@@ -29,7 +29,7 @@ void SElSelectMapItemWidget::Construct(const FArguments& InArgs)
 			.VAlign(VAlign_Fill)
 			[
 				SAssignNew(MapImage,SImage)
-				.Image(&MenuStyle->MapBg)
+				.Image(&MenuStyle->TextBg)
 			]
 			+SOverlay::Slot()
 			.HAlign(HAlign_Center)

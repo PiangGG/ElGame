@@ -31,7 +31,18 @@ struct EL_API FElGameStyle : public FSlateWidgetStyle
 	FSlateBrush ProbarBGBrush;
 	UPROPERTY(EditAnywhere,Category=MenuHUD)
 	FSlateBrush ProbarFillImageBrush;
-	
+
+	UPROPERTY(EditAnywhere,Category=Icon)
+	FSlateBrush Icon_Power1;
+	UPROPERTY(EditAnywhere,Category=Icon)
+	FSlateBrush Icon_Power2;
+	UPROPERTY(EditAnywhere,Category=Icon)
+	FSlateBrush Icon_Option;
+	UPROPERTY(EditAnywhere,Category=Icon)
+	FSlateBrush Icon_ReStart;
+
+	UPROPERTY(EditAnywhere,Category=PowerButton)
+	FButtonStyle PowerButtonStyle;
 };
 
 /**

@@ -1,12 +1,12 @@
  [
 	 {
-		 "Language":"ZH"
+		 "Language":"简体中文"
 	 },
 	{
 		"Languages": 
 		[
-			{"0": "ZH"},
-			{"1": "EN"}
+			{"0": "简体中文"},
+			{"1": "English"}
 		]
 	}
 ]

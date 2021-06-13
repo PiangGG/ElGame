@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 
+#include "Data/ElTypes.h"
 #include "El/ElGameModeBase.h"
 
 #include "ElGMInGame.generated.h"
@@ -18,4 +19,10 @@ class EL_API AElGMInGame : public AElGameModeBase
 public:
 	AElGMInGame();
 	virtual void BeginPlay() override;
+
+	EGameState::Type CurrentGameState;
+
+	void SetGameComplate();
+
+	void ReStartGame();
 };

@@ -7,3 +7,13 @@ UElGI::UElGI()
 {
 	
 }
+
+int UElGI::GetCurrentMapID()
+{
+	return CurrentMapID;
+}
+
+void UElGI::SetCurrentMapID(int ID)
+{
+	CurrentMapID=ID;
+}
