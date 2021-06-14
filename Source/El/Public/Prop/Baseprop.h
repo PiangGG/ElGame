@@ -21,10 +21,10 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 	UFUNCTION()
-	void OnOverlayBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
+	virtual void OnOverlayBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 	UFUNCTION()
-	void OnOverlayEnd(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
+	virtual void OnOverlayEnd(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 	
 	void UpdateInfoWidget(FVector Loaction);
@@ -61,4 +61,9 @@ public:
 	bool bInPower=false;
 	
     FVector	ActorScale3D=FVector(1.0f);
+
+	class UParticleSystemComponent*ParticleComp;
+	class UParticleSystem* ParticleSystem;
+	
+	bool ParticleSystemActive=false;
 };

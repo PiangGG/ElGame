@@ -32,6 +32,15 @@ void SElGameCompleteWidget::Construct(const FArguments& InArgs)
 				.Image(&GameStyle->GameBackgroundBrush)
 			]
 			+SOverlay::Slot()
+			.HAlign(HAlign_Center)
+			.VAlign(VAlign_Top)
+			.Padding(FMargin(0.0f,100.0f,0.0f,0.0f))
+			[
+				SNew(STextBlock)
+				.Text(NSLOCTEXT("ElMenu","GameComplate!","GameComplate!"))
+				.Font(GameStyle->GameFont)
+			]
+			+SOverlay::Slot()
 			.Padding(FMargin(200.0f,350.0f,200.0f,350.0f))
 			[
 				SAssignNew(GameOptionGridPanel,SUniformGridPanel)

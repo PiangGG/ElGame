@@ -40,9 +40,14 @@ struct EL_API FElGameStyle : public FSlateWidgetStyle
 	FSlateBrush Icon_Option;
 	UPROPERTY(EditAnywhere,Category=Icon)
 	FSlateBrush Icon_ReStart;
-
+	UPROPERTY(EditAnywhere,Category=Icon)
+	FSlateBrush Icon_Other;
+	
 	UPROPERTY(EditAnywhere,Category=PowerButton)
 	FButtonStyle PowerButtonStyle;
+
+	UPROPERTY(EditAnywhere,Category=Font)
+	FSlateFontInfo GameFont;
 };
 
 /**

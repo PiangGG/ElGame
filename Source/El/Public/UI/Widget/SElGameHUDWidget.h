@@ -29,6 +29,8 @@ public:
 	void GameState_Option();
 
 	void GameState_Complete();
+
+	void GameState_Over();
 	
 	void GameOption_OnClick();
 	
@@ -49,7 +51,10 @@ public:
 	TSharedPtr<class SButtonWidget> OptionButton;
 	
 	TSharedPtr<class SGemeOptionWidget> GemeOptionWidget;
+	
 	TSharedPtr<class SElGameCompleteWidget> GemeCompleteWidget;
+	
+	TSharedPtr<class SElGameOverWidget> GemeOverWidget;
 private:
 	//引入Sytle|获取GameStyle
 	const struct FElGameStyle* GameStyle;

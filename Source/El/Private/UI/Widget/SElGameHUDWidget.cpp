@@ -13,6 +13,7 @@
 #include "UI/Style/ElStyle.h"
 #include "UI/Widget/SButtonWidget.h"
 #include "UI/Widget/SElGameCompleteWidget.h"
+#include "UI/Widget/SElGameOverWidget.h"
 #include "UI/Widget/SElUserInfoWidget.h"
 #include "UI/Widget/SGemeOptionWidget.h"
 #include "Widgets/Images/SImage.h"
@@ -81,6 +82,13 @@ void SElGameHUDWidget::Construct(const FArguments& InArgs)
 				SAssignNew(GemeCompleteWidget,SElGameCompleteWidget)
 				.Visibility(EVisibility::Hidden)
 			]
+			+SOverlay::Slot()
+			.HAlign(HAlign_Fill)
+			.VAlign(VAlign_Fill)
+			[
+				SAssignNew(GemeOverWidget,SElGameOverWidget)
+				.Visibility(EVisibility::Hidden)
+			]
 		]
 		
 	];
@@ -128,6 +136,9 @@ void SElGameHUDWidget::ChangeGameHUDState(EGameHUDState::Type GameHUDState)
 		break;
 	case EGameHUDState::Complete:
 		GameState_Complete();
+		break;
+	case EGameHUDState::Over:
+		GameState_Over();
 	default: break;
 	}
 }
@@ -151,6 +162,10 @@ void SElGameHUDWidget::GameState_None()
 	{
 		GemeCompleteWidget->SetVisibility(EVisibility::Hidden);
 	}
+	if (GemeOverWidget)
+	{
+		GemeOverWidget->SetVisibility(EVisibility::Hidden);
+	}
 }
 
 void SElGameHUDWidget::GameState_Option()
@@ -171,6 +186,10 @@ void SElGameHUDWidget::GameState_Option()
 	if (GemeCompleteWidget)
 	{
 		GemeCompleteWidget->SetVisibility(EVisibility::Hidden);
+	}
+	if (GemeOverWidget)
+	{
+		GemeOverWidget->SetVisibility(EVisibility::Hidden);
 	}
 }
 
@@ -193,6 +212,36 @@ void SElGameHUDWidget::GameState_Complete()
 	{
 		GemeCompleteWidget->SetVisibility(EVisibility::Visible);
 	}
+	if (GemeOverWidget)
+	{
+		GemeOverWidget->SetVisibility(EVisibility::Hidden);
+	}
+}
+
+void SElGameHUDWidget::GameState_Over()
+{
+	if (ElUserInfoWidget)
+	{
+		ElUserInfoWidget->SetVisibility(EVisibility::Hidden);
+	}
+	if (OptionButton)
+	{
+		OptionButton->SetVisibility(EVisibility::Hidden);
+		bOptionVisibility=EVisibility::Hidden;
+	}
+	if (GemeOptionWidget)
+	{
+		GemeOptionWidget->SetVisibility(EVisibility::Hidden);
+	}
+	if (GemeCompleteWidget)
+	{
+		GemeCompleteWidget->SetVisibility(EVisibility::Hidden);
+	}
+	if (GemeOverWidget)
+	{
+		GemeOverWidget->SetVisibility(EVisibility::Visible);
+	}
+	
 }
 
 void SElGameHUDWidget::GameOption_OnClick()

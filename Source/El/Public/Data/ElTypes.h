@@ -82,6 +82,7 @@ namespace EGameHUDState
 	{
 		None,
 		Option,
-		Complete
+		Complete,
+		Over
 	};
 }
