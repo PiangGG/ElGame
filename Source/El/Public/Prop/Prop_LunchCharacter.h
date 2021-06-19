@@ -28,5 +28,5 @@ protected:
 private:
 	FVector StartLocation;
 	FVector CurrentLocation;
-	bool bBaseState;
+	
 };

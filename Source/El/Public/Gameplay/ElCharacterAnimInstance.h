@@ -35,6 +35,8 @@ public:
 	UPROPERTY(BlueprintReadWrite,Category=AnimaCharactre)
 	bool IsCrouch;
 	UPROPERTY(BlueprintReadWrite,Category=AnimaCharactre)
+	bool IsUsePower;
+	UPROPERTY(BlueprintReadWrite,Category=AnimaCharactre)
 	class AElCharacter *ElCharacter;
 	
 };

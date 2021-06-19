@@ -15,6 +15,7 @@ class EL_API AProp_GameCompleteDoor : public ABaseprop
 	GENERATED_BODY()
 	
 	public:
+	AProp_GameCompleteDoor();
 	virtual void BeginPlay() override;
 	virtual void DoSomethinging(float speed) override;
 	bool bComplete = false;

@@ -16,6 +16,7 @@ class EL_API ABasepropRotate : public ABaseprop
 	public:
 	virtual void BeginPlay() override;
 	virtual void DoSomethinging(float speed) override;
+	
 	public:
 	FRotator StartRotaor;
 };

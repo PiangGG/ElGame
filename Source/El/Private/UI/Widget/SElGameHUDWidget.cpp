@@ -3,7 +3,6 @@
 
 #include "UI/Widget/SElGameHUDWidget.h"
 
-#include "SEditorViewportToolBarMenu.h"
 #include "SlateOptMacros.h"
 #include "Common/ElHelper.h"
 #include "Gameplay/ElGI.h"
@@ -246,7 +245,7 @@ void SElGameHUDWidget::GameState_Over()
 
 void SElGameHUDWidget::GameOption_OnClick()
 {
-	ElHelper::Debug(FString("GameOption_OnClick"));
+	//ElHelper::Debug(FString("GameOption_OnClick"));
 	ChangeGameHUDState(EGameHUDState::Option);
 }
 

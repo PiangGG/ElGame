@@ -43,8 +43,8 @@ inline void AProp_LunchCharacter::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
 	
-	ElHelper::Debug(FString("StartLocation:"+StartLocation.ToString()),0);
-	ElHelper::Debug(FString("CurretLoction:"+CurrentLocation.ToString()),0);
+	//ElHelper::Debug(FString("StartLocation:"+StartLocation.ToString()),0);
+	//ElHelper::Debug(FString("CurretLoction:"+CurrentLocation.ToString()),0);
 	if (bBaseState==false)
 	{
 		CurrentLocation=FMath::VInterpTo(CurrentLocation,StartLocation,DeltaSeconds,1.0f);

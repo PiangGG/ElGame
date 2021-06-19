@@ -2,8 +2,6 @@
 
 
 #include "UI/Widget/SElMenuSettingWidget.h"
-
-#include "SEditorViewportToolBarMenu.h"
 #include "SlateOptMacros.h"
 #include "Common/ElHelper.h"
 #include "Data/ElDataHandle.h"

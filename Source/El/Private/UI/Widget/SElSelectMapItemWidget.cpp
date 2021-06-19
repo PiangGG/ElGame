@@ -55,14 +55,14 @@ void SElSelectMapItemWidget::Init(FText Text)
 FReply SElSelectMapItemWidget::OnMouseButtonDoubleClick(const FGeometry& InMyGeometry,
 	const FPointerEvent& InMouseEvent)
 {
-	ElHelper::Debug(FString("OnMouseButtonDoubleClick"));
+	//ElHelper::Debug(FString("OnMouseButtonDoubleClick"));
 	MapWidgetClicked.ExecuteIfBound(MapId);
 	return FReply::Handled();
 }
 
 FReply SElSelectMapItemWidget::OnMouseButtonClick(const FGeometry& InMyGeometry, const FPointerEvent& InMouseEvent)
 {
-	ElHelper::Debug(FString("OnMouseButtonClick"));
+	//ElHelper::Debug(FString("OnMouseButtonClick"));
 	MapWidgetClicked.ExecuteIfBound(MapId);
 	return FReply::Handled();
 }

@@ -38,10 +38,13 @@ public:
 	virtual void OutPower(float Speed);
 public:
 	//跟组件
+	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category=Component)
 	class USceneComponent* RootComp;
 	//网格体
+	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category=Component)
 	class UStaticMeshComponent* BaseMesh;
 	//碰撞体
+	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category=Component)
 	class UBoxComponent* BoxComp;
 	
 	class UPropWidgetComponent*WidgetComp;
@@ -66,4 +69,6 @@ public:
 	class UParticleSystem* ParticleSystem;
 	
 	bool ParticleSystemActive=false;
+
+	bool bBaseState;
 };

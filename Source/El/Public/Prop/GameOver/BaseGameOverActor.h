@@ -28,7 +28,12 @@ public:
 
 	
 protected:
+	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category=attribute)
  	class USceneComponent* RootComp;
 
+	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category=attribute)
 	class UBoxComponent* BoxComp;
+
+	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category=attribute)
+	class UStaticMeshComponent* BaseMesh;
 };

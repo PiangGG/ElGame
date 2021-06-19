@@ -73,7 +73,7 @@ void SElMenuSelectMapWidget::Construct(const FArguments& InArgs)
 	];
 	if (MapGridPanel)
 	{
-		ElHelper::Debug(FString("MapGridPanel"));
+		//ElHelper::Debug(FString("MapGridPanel"));
 		for (int i=0;i<18;i++)
 		{	
 			TSharedPtr<SElSelectMapItemWidget> MapItemWidget;
@@ -104,7 +104,7 @@ void SElMenuSelectMapWidget::MenuButtonOnClicked(EMenuButtonType::Type type)
 }
 void SElMenuSelectMapWidget::MenuSelectMapOnClicked(int id)
 {
-	ElHelper::Debug(FString::FromInt(id));
+	//ElHelper::Debug(FString::FromInt(id));
 	
 	UElGI *GI=Cast<UElGI>(UGameplayStatics::GetGameInstance(GWorld));
 	GI->SetCurrentMapID(id);

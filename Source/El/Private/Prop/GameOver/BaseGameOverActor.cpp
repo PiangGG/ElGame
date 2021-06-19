@@ -20,6 +20,16 @@ ABaseGameOverActor::ABaseGameOverActor()
 	BoxComp=CreateDefaultSubobject<UBoxComponent>(TEXT("BoxComp"));
 	BoxComp->OnComponentBeginOverlap.AddDynamic(this,&ABaseGameOverActor::OnOverlayBegin);
 	BoxComp->SetupAttachment(RootComponent);
+	BoxComp->SetBoxExtent(FVector(64.0f));
+	ConstructorHelpers::FObjectFinder<UMaterial> Mat(TEXT("Material'/Game/Res/Mat/M_LaserPointer-Core.M_LaserPointer-Core'"));;
+
+
+	BaseMesh=CreateDefaultSubobject<UStaticMeshComponent>(TEXT("BaseMesh"));
+	ConstructorHelpers::FObjectFinder<UStaticMesh> StaticMesh(TEXT("StaticMesh'/Game/Res/Meshs/Cube.Cube'"));
+	BaseMesh->SetupAttachment(BoxComp);
+	BaseMesh->SetStaticMesh(StaticMesh.Object);
+	BaseMesh->SetMaterial(0,Mat.Object);
+	//BaseMesh->SetWorldScale3D(FVector(0.3f));
 }
 
 // Called when the game starts or when spawned
