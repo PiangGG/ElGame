@@ -86,3 +86,30 @@ namespace EGameHUDState
 		Over
 	};
 }
+
+namespace EPropState
+{
+	enum State
+	{
+		
+		
+	};
+}
+
+namespace EAutomaticPropState
+{
+	enum State
+	{
+		To,
+		Back
+	};
+}
+namespace EControlPropState
+{
+	enum State
+	{
+		Red,
+		Green,
+		Blue
+	};
+} 

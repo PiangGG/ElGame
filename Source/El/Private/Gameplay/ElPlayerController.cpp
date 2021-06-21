@@ -17,8 +17,8 @@ void AElPlayerController::BeginPlay()
 	
 	SAssignNew(GameHUDWidget, SElGameHUDWidget);
 	GetWorld()->GetGameViewport()->AddViewportWidgetContent(GameHUDWidget.ToSharedRef());
-	GameHUDWidget->SetVisibility(EVisibility::Hidden);
-	CurrentTouchInterface->Activate(VirtualJoystick);
+	//GameHUDWidget->SetVisibility(EVisibility::Hidden);
+	//CurrentTouchInterface->Activate(VirtualJoystick);
 }
 
 AElPlayerController::AElPlayerController()

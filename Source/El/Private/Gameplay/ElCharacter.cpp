@@ -6,12 +6,14 @@
 #include "Camera/CameraComponent.h"
 #include "Common/ElHelper.h"
 #include "Component/BatteryComponent.h"
+#include "Components/LineBatchComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/GameModeBase.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "Particles/ParticleSystemComponent.h"
 #include "Prop/Baseprop.h"
+#include "Prop/ControlProp.h"
 #include "UI/HUD/ElGameHUD.h"
 #include "UI/Widget/SElGameHUDWidget.h"
 #include "UI/Widget/SElUserInfoWidget.h"
@@ -33,8 +35,9 @@ AElCharacter::AElCharacter()
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>(FName("Camera Boom"));
 	SpringArm->bUsePawnControlRotation = false;
 	SpringArm->SetUsingAbsoluteRotation(true);
-	SpringArm->TargetArmLength = 700.f;
+	SpringArm->TargetArmLength = 300.f;
 	SpringArm->SetupAttachment(RootComponent);
+	SpringArm->SetRelativeLocation(FVector(0.0f,20.0f,120.0f));
 	SpringArm->bEnableCameraLag =true;
 	
 	Camera = CreateDefaultSubobject<UCameraComponent>(FName("Camera"));
@@ -161,7 +164,7 @@ void AElCharacter::ChangeCameraHeight(float amount)
 
 		float originalHeight = rot.Y;
 		originalHeight += amount;
-		originalHeight = FMath::Clamp(originalHeight, -45.f, -5.f);
+		originalHeight = FMath::Clamp(originalHeight, -45.f, 45.f);
 
 		rot = FVector(0, originalHeight, rot.Z);
 		SpringArm->SetWorldRotation(FQuat::MakeFromEuler(rot));
@@ -200,11 +203,34 @@ void AElCharacter::OutPower()
 		//ElHelper::Debug(FString("AElCharacter::OutPower()"));
 		CurrenOverlapBaseprop->InPower(10.0);
 		bUsePower = true;
-		
 	}
+	LeftOnClickLineTrance();
 }
 
 FVector AElCharacter::GetCameraLocation()
 {
 	return Camera->GetComponentLocation();
+}
+
+void AElCharacter::LeftOnClickLineTrance()
+{
+	FVector StartPos(0.0f);
+	FVector EndPos(0.0f);
+	StartPos=Camera->GetComponentLocation();
+	StartPos=StartPos+Camera->GetForwardVector()*300.f;
+	EndPos=StartPos+Camera->GetForwardVector()*2000.f;
+	
+	FCollisionQueryParams TraceParams;
+	TraceParams.AddIgnoredActor(this);
+	TraceParams.bReturnPhysicalMaterial = false;
+	TraceParams.bTraceComplex = true;
+	FHitResult Hit(ForceInit);
+	if (GetWorld()->LineTraceSingleByChannel(Hit,StartPos,EndPos,ECC_GameTraceChannel1,TraceParams))
+	{
+		if (Cast<AControlProp>(Hit.GetActor()))
+		{
+			Cast<AControlProp>(Hit.GetActor())->ChangeNextState();
+		}
+	}
+	
 }

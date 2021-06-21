@@ -48,6 +48,9 @@ struct EL_API FElGameStyle : public FSlateWidgetStyle
 
 	UPROPERTY(EditAnywhere,Category=Font)
 	FSlateFontInfo GameFont;
+
+	UPROPERTY(EditAnywhere,Category=Icon)
+	FSlateBrush ArmImage;
 };
 
 /**

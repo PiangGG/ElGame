@@ -68,6 +68,14 @@ void SElGameHUDWidget::Construct(const FArguments& InArgs)
 				]	
 			]
 			+SOverlay::Slot()
+			.HAlign(HAlign_Center)
+			.VAlign(VAlign_Center)
+			[
+				SNew(SImage)
+				.Image(&GameStyle->ArmImage)
+				
+			]
+			+SOverlay::Slot()
 			.HAlign(HAlign_Fill)
 			.VAlign(VAlign_Fill)
 			[

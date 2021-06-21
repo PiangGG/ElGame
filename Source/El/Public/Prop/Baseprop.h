@@ -33,7 +33,6 @@ public:
 	virtual void DoSomethingStart();
 	virtual void DoSomethingEnd();
 	virtual void DoSomethinging(float speed);
-
 	virtual void InPower(float Speed);
 	virtual void OutPower(float Speed);
 public:
@@ -49,9 +48,13 @@ public:
 	
 	class UPropWidgetComponent*WidgetComp;
 
- 	TSharedPtr<class SElUserInfoWidget>InfoWidget;
+ 	TSharedPtr<class SElUserInfoWidget> InfoWidget;
 
 	class UBatteryComponent* BatteryComp;
+	
+	class UParticleSystemComponent*ParticleComp;
+	
+	class UParticleSystem* ParticleSystem;
 	
 	bool bOverlap = false;
 
@@ -62,11 +65,6 @@ public:
 	bool bUsePower;
 
 	bool bInPower=false;
-	
-    FVector	ActorScale3D=FVector(1.0f);
-
-	class UParticleSystemComponent*ParticleComp;
-	class UParticleSystem* ParticleSystem;
 	
 	bool ParticleSystemActive=false;
 

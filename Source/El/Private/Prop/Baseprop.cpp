@@ -147,7 +147,7 @@ void ABaseprop::DoSomethingEnd()
 
 void ABaseprop::DoSomethinging(float speed)
 {
-	this->SetActorScale3D(ActorScale3D+=FVector(speed*0.001));
+	//this->SetActorScale3D(ActorScale3D+=FVector(speed*0.001));
 }
 
 void ABaseprop::InPower(float Speed)
