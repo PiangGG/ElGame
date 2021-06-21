@@ -1,6 +1,6 @@
 {
 	"FileVersion": 3,
-	"EngineAssociation": "5.0.0",
+	"EngineAssociation": "5.0EA",
 	"Category": "",
 	"Description": "",
 	"Modules": [
@@ -13,6 +13,17 @@
 				"Slate",
 				"SlateCore",
 				"UMG"
+			]
+		}
+	],
+	"Plugins": [
+		{
+			"Name": "Bridge",
+			"Enabled": true,
+			"SupportedTargetPlatforms": [
+				"Win64",
+				"Mac",
+				"Linux"
 			]
 		}
 	]
