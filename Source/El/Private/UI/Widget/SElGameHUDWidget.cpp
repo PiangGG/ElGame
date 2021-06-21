@@ -25,7 +25,7 @@ void SElGameHUDWidget::Construct(const FArguments& InArgs)
 	ChildSlot
 	[
 		// Populate the widget
-		SNew(SBox)
+		SAssignNew(RootBox,SBox)
 		.HAlign(HAlign_Fill)
 		.VAlign(VAlign_Fill)
 		[

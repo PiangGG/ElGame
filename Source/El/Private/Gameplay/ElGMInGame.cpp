@@ -12,12 +12,10 @@
 
 AElGMInGame::AElGMInGame()
 {
-	HUDClass=AElGameHUD::StaticClass();
+	//HUDClass=AElGameHUD::StaticClass();
 	PlayerControllerClass=AElPlayerController::StaticClass();
 	//PlayerStateClass
 	DefaultPawnClass=AElCharacter::StaticClass();
-
-	
 }
 
 void AElGMInGame::BeginPlay()

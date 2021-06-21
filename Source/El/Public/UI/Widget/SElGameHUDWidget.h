@@ -44,9 +44,10 @@ public:
 	
 	void NextMap_OnClick();
 
-
 public:
 	TSharedPtr<class SElUserInfoWidget> ElUserInfoWidget;
+	
+	TSharedPtr<class SBox> RootBox;
 
 	TSharedPtr<class SButtonWidget> OptionButton;
 	

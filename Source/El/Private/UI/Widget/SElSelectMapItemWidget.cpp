@@ -67,4 +67,10 @@ FReply SElSelectMapItemWidget::OnMouseButtonClick(const FGeometry& InMyGeometry,
 	return FReply::Handled();
 }
 
+FReply SElSelectMapItemWidget::OnTouchEnded(const FGeometry& MyGeometry, const FPointerEvent& InTouchEvent)
+{
+	MapWidgetClicked.ExecuteIfBound(MapId);
+	return FReply::Handled();
+}
+
 END_SLATE_FUNCTION_BUILD_OPTIMIZATION
