@@ -30,6 +30,8 @@ public:
 	virtual FReply OnMouseButtonUp(const FGeometry& MyGeometry, const FPointerEvent& MouseEvent) override;
 	//virtual FReply OnFocusReceived(const FGeometry& MyGeometry, const FFocusEvent& InFocusEvent) override;
 	virtual  void OnMouseLeave(const FPointerEvent& MouseEvent) override;
+
+	virtual FReply OnTouchStarted(const FGeometry& MyGeometry, const FPointerEvent& InTouchEvent) override;
 private:
 	//引入Sytle|获取MenuStyle
 	const struct FElMenuStyle* MenuStyle;

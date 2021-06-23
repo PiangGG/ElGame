@@ -67,3 +67,9 @@ void SButtonWidget::OnMouseLeave(const FPointerEvent& MouseEvent)
 {
 	IsMouseButtonDow=false;
 }
+
+FReply SButtonWidget::OnTouchStarted(const FGeometry& MyGeometry, const FPointerEvent& InTouchEvent)
+{
+	OnClicked.ExecuteIfBound(MenuButtonType);
+	return FReply::Handled();
+}

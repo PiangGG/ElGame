@@ -33,6 +33,9 @@ public:
 	void CrouchEl();
 	void UnCrouchEl();
 
+	void LeftMouseButtonDown();
+	void LeftMouseButtonUp();
+	
 	void InPower();
 	void OutPower();
 	bool bUsePower = false;
@@ -68,7 +71,13 @@ private:
 	//class SElGameHUDWidget*GameHUDWidget;
 	//
 	void OverlapBaseprop(class ABaseprop* prop);
-	class ABaseprop* CurrenOverlapBaseprop=nullptr;
+	void OverlapBaseprop(class AOverlapProp* prop);
+
+	void BeginOverlapprop(AActor* prop);
+	void EndOverlapprop(AActor* prop);
+	
+	AActor* CurrenOverlapprop=nullptr;
+	
 	bool bOverlapBaseprop=false;
 
 	void GameOver();

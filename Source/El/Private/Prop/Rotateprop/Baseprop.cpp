@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "Prop/Baseprop.h"
+#include "Prop/Rotateprop/Baseprop.h"
 
 #include "Common/ElHelper.h"
 #include "Component/BatteryComponent.h"
@@ -9,7 +9,7 @@
 #include "Gameplay/ElCharacter.h"
 #include "Kismet/GameplayStatics.h"
 #include "Particles/ParticleSystemComponent.h"
-#include "Prop/PropWidgetComponent.h"
+#include "Prop/Rotateprop/PropWidgetComponent.h"
 #include "UI/Widget/SElUserInfoWidget.h"
 
 // Sets default values
@@ -112,6 +112,7 @@ void ABaseprop::UpdateInfoWidget(FVector Loaction)
 	FVector TargetPos(Loaction.X, Loaction.Y, 0.f);
 	WidgetComp->SetWorldRotation(FRotationMatrix::MakeFromX(TargetPos - StartPos).Rotator());
 	WidgetComp->SetWorldLocation(OverlapCharacter->GetActorLocation()+FVector(0.0f,0.0f,100.0f));
+	WidgetComp->SetRelativeScale3D(FVector(1.f));
 	if (InfoWidget&&BatteryComp)
 	{
 		InfoWidget->UpdateProgressBar(BatteryComp->GetRatio());

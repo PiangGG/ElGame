@@ -3,11 +3,13 @@
 
 #include "UI/Widget/SElUserInfoWidget.h"
 #include "SlateOptMacros.h"
+#include "Common/ElHelper.h"
 #include "Gameplay/ElCharacter.h"
 #include "Kismet/GameplayStatics.h"
 #include "UI/Style/ElGameWidgetStyle.h"
 #include "UI/Style/ElStyle.h"
 #include "UI/Widget/SButtonWidget.h"
+#include "UI/Widget/SDragMoveButtonWidget.h"
 #include "Widgets/Images/SImage.h"
 #include "Widgets/Notifications/SProgressBar.h"
 
@@ -63,6 +65,20 @@ void SElUserInfoWidget::Construct(const FArguments& InArgs)
 				.OnReleased(this,&SElUserInfoWidget::PowerButtonOnOnOnReleased)
 				
 			]
+			/*+SOverlay::Slot()
+			.HAlign(HAlign_Left)
+			.VAlign(VAlign_Bottom)
+			.Padding(FMargin(160.0f,0.0f,100.0f,90.0f))
+			[
+				SNew(SOverlay)
+				+SOverlay::Slot()
+				.HAlign(HAlign_Fill)
+				.VAlign(VAlign_Fill)
+				[
+					SAssignNew(DragMoveButton,SDragMoveButtonWidget)
+				]
+				
+			]*/
 		]
 	];
 	
@@ -84,4 +100,13 @@ void SElUserInfoWidget::PowerButtonOnOnOnReleased()
 {
 	Cast<AElCharacter>(UGameplayStatics::GetPlayerCharacter(GWorld,0))->InPower();
 }
+
+FReply SElUserInfoWidget::OnDrop(const FGeometry& MyGeometry, const FDragDropEvent& DragDropEvent)
+{
+	OnDragDetected(MyGeometry,DragDropEvent);
+	ElHelper::Debug(FString("OnDragDetected(MyGeometry,DragDropEvent);"));
+	
+	return FReply::Handled();
+}
+
 END_SLATE_FUNCTION_BUILD_OPTIMIZATION

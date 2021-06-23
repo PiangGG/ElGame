@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Prop/Baseprop.h"
+#include "Prop/Rotateprop/Baseprop.h"
 #include "Rotateprop.generated.h"
 
 /**

@@ -5,9 +5,11 @@
 
 #include "SlateOptMacros.h"
 #include "Common/ElHelper.h"
+#include "GameFramework/HUD.h"
 #include "Gameplay/ElGI.h"
 #include "Gameplay/ElPlayerController.h"
 #include "Kismet/GameplayStatics.h"
+#include "UI/HUD/ElGameHUD.h"
 #include "UI/Style/ElGameWidgetStyle.h"
 #include "UI/Style/ElStyle.h"
 #include "UI/Widget/SButtonWidget.h"
@@ -26,8 +28,6 @@ void SElGameHUDWidget::Construct(const FArguments& InArgs)
 	[
 		// Populate the widget
 		SAssignNew(RootBox,SBox)
-		.HAlign(HAlign_Fill)
-		.VAlign(VAlign_Fill)
 		[
 			SNew(SOverlay)
 			+SOverlay::Slot()
@@ -36,7 +36,7 @@ void SElGameHUDWidget::Construct(const FArguments& InArgs)
 			.Padding(FMargin(0.0f,0.0f,0.0f,100.0f))
 			[
 				SAssignNew(ElUserInfoWidget,SElUserInfoWidget)
-				.Visibility(EVisibility::Visible)
+				.Visibility(EVisibility::Hidden)
 			]
 			+SOverlay::Slot()
 			.HAlign(HAlign_Right)
@@ -46,7 +46,7 @@ void SElGameHUDWidget::Construct(const FArguments& InArgs)
 				SNew(SBox)
 				.HeightOverride(50.0f)
 				.WidthOverride(50.0f)
-				.Visibility(bOptionVisibility)
+				.Visibility(EVisibility::Visible)
 				[
 					SNew(SOverlay)
 					+SOverlay::Slot()
@@ -132,6 +132,7 @@ void SElGameHUDWidget::GameButtonOnClicked(EMenuButtonType::Type ButtonType)
 
 void SElGameHUDWidget::ChangeGameHUDState(EGameHUDState::Type GameHUDState)
 {
+	
 	CurrenGameHUDState=GameHUDState;
 	switch (CurrenGameHUDState)
 	{
@@ -152,14 +153,9 @@ void SElGameHUDWidget::ChangeGameHUDState(EGameHUDState::Type GameHUDState)
 
 void SElGameHUDWidget::GameState_None()
 {
-	if (ElUserInfoWidget)
+	if (Cast<AElGameHUD>(GWorld->GetFirstPlayerController()->GetHUD()))
 	{
-		ElUserInfoWidget->SetVisibility(EVisibility::Visible);
-	}
-	if (OptionButton)
-	{
-		OptionButton->SetVisibility(EVisibility::Visible);
-		bOptionVisibility=EVisibility::Visible;
+		Cast<AElGameHUD>(GWorld->GetFirstPlayerController()->GetHUD())->HindGameHUDWidget();
 	}
 	if (GemeOptionWidget)
 	{
@@ -177,14 +173,9 @@ void SElGameHUDWidget::GameState_None()
 
 void SElGameHUDWidget::GameState_Option()
 {
-	if (ElUserInfoWidget)
+	if (Cast<AElGameHUD>(GWorld->GetFirstPlayerController()->GetHUD()))
 	{
-		ElUserInfoWidget->SetVisibility(EVisibility::Hidden);
-	}
-	if (OptionButton)
-	{
-		OptionButton->SetVisibility(EVisibility::Hidden);
-		bOptionVisibility=EVisibility::Hidden;
+		Cast<AElGameHUD>(GWorld->GetFirstPlayerController()->GetHUD())->ShowGameHUDWidget();
 	}
 	if (GemeOptionWidget)
 	{
@@ -202,9 +193,9 @@ void SElGameHUDWidget::GameState_Option()
 
 void SElGameHUDWidget::GameState_Complete()
 {
-	if (ElUserInfoWidget)
+	if (Cast<AElGameHUD>(GWorld->GetFirstPlayerController()->GetHUD()))
 	{
-		ElUserInfoWidget->SetVisibility(EVisibility::Hidden);
+		Cast<AElGameHUD>(GWorld->GetFirstPlayerController()->GetHUD())->ShowGameHUDWidget();
 	}
 	if (OptionButton)
 	{
@@ -223,14 +214,19 @@ void SElGameHUDWidget::GameState_Complete()
 	{
 		GemeOverWidget->SetVisibility(EVisibility::Hidden);
 	}
+	GWorld->GetFirstPlayerController()->GetHUD()->SetHidden(false);
 }
 
 void SElGameHUDWidget::GameState_Over()
 {
-	if (ElUserInfoWidget)
+	if (Cast<AElGameHUD>(GWorld->GetFirstPlayerController()->GetHUD()))
 	{
-		ElUserInfoWidget->SetVisibility(EVisibility::Hidden);
+		Cast<AElGameHUD>(GWorld->GetFirstPlayerController()->GetHUD())->ShowGameHUDWidget();
 	}
+	/*if (ElUserInfoWidget)
+	{
+		//ElUserInfoWidget->SetVisibility(EVisibility::Hidden);
+	}*/
 	if (OptionButton)
 	{
 		OptionButton->SetVisibility(EVisibility::Hidden);
@@ -248,7 +244,7 @@ void SElGameHUDWidget::GameState_Over()
 	{
 		GemeOverWidget->SetVisibility(EVisibility::Visible);
 	}
-	
+	GWorld->GetFirstPlayerController()->GetHUD()->SetHidden(false);
 }
 
 void SElGameHUDWidget::GameOption_OnClick()
@@ -259,7 +255,12 @@ void SElGameHUDWidget::GameOption_OnClick()
 
 void SElGameHUDWidget::BackGame_OnClick()
 {
+	if (Cast<AElGameHUD>(GWorld->GetFirstPlayerController()->GetHUD()))
+	{
+		Cast<AElGameHUD>(GWorld->GetFirstPlayerController()->GetHUD())->HindGameHUDWidget();
+	}
 	ChangeGameHUDState(EGameHUDState::None);
+	
 }
 
 void SElGameHUDWidget::ReStartGame_OnClick()

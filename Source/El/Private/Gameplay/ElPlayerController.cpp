@@ -15,15 +15,20 @@ void AElPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	SAssignNew(GameHUDWidget, SElGameHUDWidget);
-	GetWorld()->GetGameViewport()->AddViewportWidgetContent(GameHUDWidget.ToSharedRef());
-	//GameHUDWidget->SetVisibility(EVisibility::Hidden);
-	//CurrentTouchInterface->Activate(VirtualJoystick);
+	//SAssignNew(GameHUDWidget, SElGameHUDWidget);
+	
+	//GEngine->GameViewport->AddViewportWidgetForPlayer(GetLocalPlayer(),GameHUDWidget.ToSharedRef(),0);
+
+	//CurrentTouchInterface->set
+	//ActivateTouchInterface(CurrentTouchInterface);
+	GameHUDWidget=Cast<AElGameHUD>(GetHUD())->GameHUDWidget;
+	
 }
 
 AElPlayerController::AElPlayerController()
 {
 	bOpenOptionWidget=false;
+	
 	
 }
 
@@ -37,21 +42,6 @@ void AElPlayerController::SetupInputComponent()
 
 void AElPlayerController::OpenOptionWidget()
 {
-	/*if (bOpenOptionWidget==false)
-	{
-		AElGameHUD *GameHUD = Cast<AElGameHUD>(GetHUD());
-		if (GameHUD)
-		{
-			GameHUD->GameHUDWidget->GameState_Option();
-		}
-	}else
-	{
-		AElGameHUD *GameHUD = Cast<AElGameHUD>(GetHUD());
-		if (GameHUD)
-		{
-			GameHUD->GameHUDWidget->GameState_None();
-		}
-	}*/
 	if (bOpenOptionWidget==false)
 	{
 		if (GameHUDWidget)
@@ -68,9 +58,10 @@ void AElPlayerController::OpenOptionWidget()
 	bOpenOptionWidget=!bOpenOptionWidget;
 	if (bOpenOptionWidget)
 	{
-		GameHUDWidget->SetVisibility(EVisibility::Visible);
+		Cast<AElGameHUD>(GetHUD())->ShowGameHUDWidget();
+		
 	}else
 	{
-		GameHUDWidget->SetVisibility(EVisibility::Hidden);	
+		Cast<AElGameHUD>(GetHUD())->HindGameHUDWidget();
 	}
 }

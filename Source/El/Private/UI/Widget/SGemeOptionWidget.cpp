@@ -115,7 +115,6 @@ void SGemeOptionWidget::MenuButtonOnClicked(EMenuButtonType::Type ButtonType)
 		if (PlayerController)
 		{
 			PlayerController->GameHUDWidget->GameButtonOnClicked(ButtonType);
-			PlayerController->GameHUDWidget->SetVisibility(EVisibility::Hidden);
 		}
 	}
 }

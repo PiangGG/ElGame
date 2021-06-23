@@ -24,12 +24,14 @@ public:
 
 	void PowerButtonOnOnPressed();
 	void PowerButtonOnOnOnReleased();
+
+	virtual FReply OnDrop(const FGeometry& MyGeometry, const FDragDropEvent& DragDropEvent) override;
 private:
 	//引入Sytle|获取GameStyle
 	const struct FElGameStyle* GameStyle;
 	TSharedPtr<class SProgressBar> ProgressBar;//电量
 	TSharedPtr<class SButton>PowerButton;
-	
+	TSharedPtr<class SDragMoveButtonWidget> DragMoveButton;
 	float size;
 };
 

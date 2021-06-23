@@ -12,8 +12,9 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "Particles/ParticleSystemComponent.h"
-#include "Prop/Baseprop.h"
+#include "Prop/Rotateprop/Baseprop.h"
 #include "Prop/ControlProp.h"
+#include "Prop/OverlapProp.h"
 #include "UI/HUD/ElGameHUD.h"
 #include "UI/Widget/SElGameHUDWidget.h"
 #include "UI/Widget/SElUserInfoWidget.h"
@@ -81,11 +82,43 @@ void AElCharacter::OverlapBaseprop(ABaseprop* prop)
 {
 	if (bOverlapBaseprop==false)
 	{
-		CurrenOverlapBaseprop=prop;
+		CurrenOverlapprop=prop;
 		bOverlapBaseprop=true;
 	}else
 	{
-		CurrenOverlapBaseprop=nullptr;
+		CurrenOverlapprop=nullptr;
+		bOverlapBaseprop=false;
+	}
+}
+
+void AElCharacter::OverlapBaseprop(AOverlapProp* prop)
+{
+	
+	if (CurrenOverlapprop==false)
+	{
+		CurrenOverlapprop=Cast<AActor>(prop);
+		bOverlapBaseprop=true;
+	}else
+	{
+		CurrenOverlapprop=nullptr;
+		bOverlapBaseprop=false;
+	}
+}
+
+void AElCharacter::BeginOverlapprop(AActor* prop)
+{
+	if (bOverlapBaseprop==false)
+	{
+		CurrenOverlapprop=prop;
+		bOverlapBaseprop=true;
+	}
+}
+
+void AElCharacter::EndOverlapprop(AActor* prop)
+{
+	if (bOverlapBaseprop)
+	{
+		CurrenOverlapprop=nullptr;
 		bOverlapBaseprop=false;
 	}
 }
@@ -104,12 +137,12 @@ void AElCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	
-	if (CurrenOverlapBaseprop&&bUsePower==true)
+	if (CurrenOverlapprop&&bUsePower==true)
 	{
 		
 		BatteryComp->SetCanUpdate(true,-5.0f);
 		ParticleComp->Activate();
-		ParticleComp->SetVectorParameter(FName("Target"),CurrenOverlapBaseprop->GetActorLocation());
+		ParticleComp->SetVectorParameter(FName("Target"),CurrenOverlapprop->GetActorLocation());
 	}else
 	{
 		BatteryComp->SetCanUpdate(false,-5.0f);
@@ -125,13 +158,18 @@ void AElCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 	InputComponent->BindAction("Crouch", EInputEvent::IE_Pressed, this, &AElCharacter::CrouchEl);
 	InputComponent->BindAction("Crouch", EInputEvent::IE_Released, this, &AElCharacter::UnCrouchEl);
 
-	InputComponent->BindAction("Power", EInputEvent::IE_Pressed, this, &AElCharacter::OutPower);
-	InputComponent->BindAction("Power", EInputEvent::IE_Released, this, &AElCharacter::InPower);
+	//InputComponent->BindAction("Power", EInputEvent::IE_Pressed, this, &AElCharacter::OutPower);
+	//InputComponent->BindAction("Power", EInputEvent::IE_Released, this, &AElCharacter::InPower);
 
+	InputComponent->BindAction("LeftMouseButton", EInputEvent::IE_Pressed, this, &AElCharacter::LeftMouseButtonDown);
+	InputComponent->BindAction("LeftMouseButton", EInputEvent::IE_Released, this, &AElCharacter::LeftMouseButtonUp);
+	
 	InputComponent->BindAxis("ChangeCameraHeight", this, &AElCharacter::ChangeCameraHeight);
 	InputComponent->BindAxis("RotateCamera", this, &AElCharacter::RotateCamera);
 	InputComponent->BindAxis("MoveForward", this, &AElCharacter::MoveForward);
 	InputComponent->BindAxis("MoveRight", this, &AElCharacter::MoveRight);
+
+	//InputComponent->BindTouch("RotateCameraTouch",this,&AElCharacter::RotateCamera);
 }
 
 void AElCharacter::MoveForward(float amount)
@@ -182,26 +220,44 @@ void AElCharacter::UnCrouchEl()
 	UnCrouch();
 }
 
+void AElCharacter::LeftMouseButtonDown()
+{
+	if (CurrenOverlapprop)
+	{	
+		AOverlapProp * Prop=Cast<AOverlapProp>(CurrenOverlapprop);
+		if (Prop)
+		{
+			Prop->SetPropDoing(true);
+		}
+		return;
+	}
+	LeftOnClickLineTrance();
+}
+
+void AElCharacter::LeftMouseButtonUp()
+{
+	if (Cast<AOverlapProp>(CurrenOverlapprop)&&CurrenOverlapprop)
+	{
+		Cast<AOverlapProp>(CurrenOverlapprop)->SetPropDoing(false);
+	}
+}
+
 void AElCharacter::InPower()
 {
 	//角色充电
-	if (CurrenOverlapBaseprop&&bUsePower==true)
+	if (CurrenOverlapprop&&bUsePower==true)
 	{
-		//ElHelper::Debug(FString("AElCharacter::InPower()"));
-		CurrenOverlapBaseprop->OutPower(-10.0);
+		Cast<ABaseprop>(CurrenOverlapprop)->OutPower(-10.0);
 		bUsePower = false;
-		
 	}
-
 }
 
 void AElCharacter::OutPower()
 {
 	//角色消电
-	if (CurrenOverlapBaseprop&&bUsePower==false)
+	if (CurrenOverlapprop&&bUsePower==false)
 	{
-		//ElHelper::Debug(FString("AElCharacter::OutPower()"));
-		CurrenOverlapBaseprop->InPower(10.0);
+		Cast<ABaseprop>(CurrenOverlapprop)->InPower(10.0);
 		bUsePower = true;
 	}
 	LeftOnClickLineTrance();
