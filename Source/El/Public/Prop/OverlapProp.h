@@ -43,7 +43,6 @@ protected:
 	
 public:
 	void SetPropDoing(bool bDoSomething);
-private:
 	bool bOverlap = false;
 	class AElCharacter*OverlapCharacter;
 	bool bDoingProp = false;

@@ -36,11 +36,11 @@ AOverlapProp::AOverlapProp()
 	OverlayEnd.BindUFunction(this,"OnOverlayEnd");
 	BoxComp->OnComponentEndOverlap.Add(OverlayEnd);
 
-	StartRotator=BaseMesh->GetComponentRotation();
-	TargetRotator=StartRotator;
-
 	StartLocation=BaseMesh->GetComponentLocation();
 	TargetLocation=StartLocation;
+	
+	StartRotator=BaseMesh->GetComponentRotation();
+	TargetRotator=StartRotator;
 
 	StartScale3D=GetActorScale3D();
 	TargetScale3D=StartScale3D;
@@ -82,7 +82,6 @@ void AOverlapProp::OnOverlayEnd(UPrimitiveComponent* OverlappedComponent, AActor
 		OverlapCharacter->EndOverlapprop(this);
 		OverlapCharacter=nullptr;
 		bOverlap = false;
-		
 	}
 	SetPropDoing(false);
 }

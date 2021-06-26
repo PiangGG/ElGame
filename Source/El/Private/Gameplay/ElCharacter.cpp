@@ -14,6 +14,7 @@
 #include "Particles/ParticleSystemComponent.h"
 #include "Prop/Rotateprop/Baseprop.h"
 #include "Prop/ControlProp.h"
+#include "Prop/LounchCharacterProp.h"
 #include "Prop/OverlapProp.h"
 #include "UI/HUD/ElGameHUD.h"
 #include "UI/Widget/SElGameHUDWidget.h"
@@ -94,7 +95,7 @@ void AElCharacter::OverlapBaseprop(ABaseprop* prop)
 void AElCharacter::OverlapBaseprop(AOverlapProp* prop)
 {
 	
-	if (CurrenOverlapprop==false)
+	if (bOverlapBaseprop==false)
 	{
 		CurrenOverlapprop=Cast<AActor>(prop);
 		bOverlapBaseprop=true;
@@ -170,6 +171,8 @@ void AElCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 	InputComponent->BindAxis("MoveRight", this, &AElCharacter::MoveRight);
 
 	//InputComponent->BindTouch("RotateCameraTouch",this,&AElCharacter::RotateCamera);
+	InputComponent->BindAxis("JumpCrouch", this, &AElCharacter::JumpCrouch);
+	InputComponent->BindAxis("Power", this, &AElCharacter::Power);
 }
 
 void AElCharacter::MoveForward(float amount)
@@ -208,37 +211,94 @@ void AElCharacter::ChangeCameraHeight(float amount)
 		SpringArm->SetWorldRotation(FQuat::MakeFromEuler(rot));
 	}
 }
+
+void AElCharacter::JumpCrouch(float amount)
+{
+	if (amount>0.0)
+	{
+		if (amount>0.5)
+		{
+			Jump();
+		}else
+		{
+			StopJumping();
+		}
+	}else
+	{
+		if (amount<-0.5)
+		{
+			CrouchEl();
+		}else
+		{
+			UnCrouchEl();
+		}
+	}
+}
+
+void AElCharacter::Power(float amount)
+{
+	if (amount>0.0)
+	{
+		if (amount>0.5)
+		{
+			LeftMouseButtonDown();
+			return;
+		}else
+		{
+			LeftMouseButtonUp();
+			return;
+		}
+	}
+}
+
 void AElCharacter::CrouchEl()
 {
-	ElHelper::Debug(FString("CrouchEl"));
+	//ElHelper::Debug(FString("CrouchEl"));
 	Crouch();
 }
 
 void AElCharacter::UnCrouchEl()
 {
-	ElHelper::Debug(FString("UnCrouchEl"));
+	//ElHelper::Debug(FString("UnCrouchEl"));
 	UnCrouch();
 }
 
 void AElCharacter::LeftMouseButtonDown()
 {
+	if (bLeftMouseButtonDown==true)
+	{
+		return;
+	}
+	bLeftMouseButtonDown=true;
 	if (CurrenOverlapprop)
 	{	
-		AOverlapProp * Prop=Cast<AOverlapProp>(CurrenOverlapprop);
-		if (Prop)
+		AOverlapProp * OverlapProp=Cast<AOverlapProp>(CurrenOverlapprop);
+		if (OverlapProp)
 		{
-			Prop->SetPropDoing(true);
+			OverlapProp->SetPropDoing(true);
+			return;
 		}
-		return;
+		
+		ALounchCharacterProp *LounchCharacterProp=Cast<ALounchCharacterProp>(CurrenOverlapprop);
+		if (LounchCharacterProp)
+		{
+			LounchCharacterProp->SetPropDoing(true);
+			return;
+		}
 	}
 	LeftOnClickLineTrance();
 }
 
 void AElCharacter::LeftMouseButtonUp()
 {
+	bLeftMouseButtonDown=false;
 	if (Cast<AOverlapProp>(CurrenOverlapprop)&&CurrenOverlapprop)
 	{
 		Cast<AOverlapProp>(CurrenOverlapprop)->SetPropDoing(false);
+	}
+	if (Cast<ALounchCharacterProp>(CurrenOverlapprop)&&CurrenOverlapprop)
+	{
+		Cast<ALounchCharacterProp>(CurrenOverlapprop)->SetPropDoing(false);
 	}
 }
 

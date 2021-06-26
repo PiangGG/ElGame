@@ -30,12 +30,16 @@ public:
 
 	void ChangeCameraHeight(float amount);
 
+	void JumpCrouch(float amount);
+
+	void Power(float amount);
+	
 	void CrouchEl();
 	void UnCrouchEl();
 
 	void LeftMouseButtonDown();
 	void LeftMouseButtonUp();
-	
+	bool bLeftMouseButtonDown = false;
 	void InPower();
 	void OutPower();
 	bool bUsePower = false;
@@ -82,3 +86,5 @@ private:
 
 	void GameOver();
 };
+
+

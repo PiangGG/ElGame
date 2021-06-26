@@ -21,9 +21,7 @@ ABaseGameOverActor::ABaseGameOverActor()
 	BoxComp->OnComponentBeginOverlap.AddDynamic(this,&ABaseGameOverActor::OnOverlayBegin);
 	BoxComp->SetupAttachment(RootComponent);
 	BoxComp->SetBoxExtent(FVector(64.0f));
-	ConstructorHelpers::FObjectFinder<UMaterial> Mat(TEXT("Material'/Game/Res/Mat/M_LaserPointer-Core.M_LaserPointer-Core'"));;
-
-
+	ConstructorHelpers::FObjectFinder<UMaterial> Mat(TEXT("Material'/Game/introduce/AnimatedPondFish/Water/Materials/M_Water.M_Water'"));
 	BaseMesh=CreateDefaultSubobject<UStaticMeshComponent>(TEXT("BaseMesh"));
 	ConstructorHelpers::FObjectFinder<UStaticMesh> StaticMesh(TEXT("StaticMesh'/Game/Res/Meshs/Cube.Cube'"));
 	BaseMesh->SetupAttachment(BoxComp);
