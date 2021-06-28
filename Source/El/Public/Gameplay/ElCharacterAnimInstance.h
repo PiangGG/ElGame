@@ -24,8 +24,13 @@ public:
 
 	void UpdateParameter();
 
+	UFUNCTION(BlueprintCallable)
+	void PlayerSoundFoot();
 	//播放蒙太奇
 	//PlayMotage
+	//播放脚步声音
+	class USoundCue* Sound1;
+	//TSharedPtr<USoundCue> Sound2;
 public:
 
 	UPROPERTY(BlueprintReadWrite,Category=AnimaCharactre)

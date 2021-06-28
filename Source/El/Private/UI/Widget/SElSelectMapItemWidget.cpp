@@ -56,20 +56,26 @@ FReply SElSelectMapItemWidget::OnMouseButtonDoubleClick(const FGeometry& InMyGeo
 	const FPointerEvent& InMouseEvent)
 {
 	//ElHelper::Debug(FString("OnMouseButtonDoubleClick"));
+	//MapWidgetClicked.ExecuteIfBound(MapId);
+	return FReply::Handled();
+}
+
+FReply SElSelectMapItemWidget::OnMouseButtonDown(const FGeometry& MyGeometry, const FPointerEvent& MouseEvent)
+{
 	MapWidgetClicked.ExecuteIfBound(MapId);
 	return FReply::Handled();
 }
 
 FReply SElSelectMapItemWidget::OnMouseButtonClick(const FGeometry& InMyGeometry, const FPointerEvent& InMouseEvent)
 {
-	//ElHelper::Debug(FString("OnMouseButtonClick"));
+	ElHelper::Debug(FString("OnMouseButtonClick"));
 	MapWidgetClicked.ExecuteIfBound(MapId);
 	return FReply::Handled();
 }
 
 FReply SElSelectMapItemWidget::OnTouchEnded(const FGeometry& MyGeometry, const FPointerEvent& InTouchEvent)
 {
-	MapWidgetClicked.ExecuteIfBound(MapId);
+	//MapWidgetClicked.ExecuteIfBound(MapId);
 	return FReply::Handled();
 }
 

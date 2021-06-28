@@ -73,6 +73,10 @@ public:
 	float UpdateSpeed_Go=1.0f;
 	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category=Speed)
 	float UpdateSpeed_Back=1.0f;
+
+	class UParticleSystemComponent*ParticleComp;
+	
+	class UParticleSystem* ParticleSystem;
 };
 
 

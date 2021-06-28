@@ -49,6 +49,7 @@ FReply SButtonWidget::OnMouseButtonDown(const FGeometry& MyGeometry, const FPoin
 {
 	IsMouseButtonDow=true;
 	//ElHelper::Debug(FString("true"));
+	OnClicked.ExecuteIfBound(MenuButtonType);
 	return FReply::Handled();
 }
 
@@ -57,7 +58,7 @@ FReply SButtonWidget::OnMouseButtonUp(const FGeometry& MyGeometry, const FPointe
 	if (IsMouseButtonDow)
 	{
 		IsMouseButtonDow=false;
-		OnClicked.ExecuteIfBound(MenuButtonType);
+		//OnClicked.ExecuteIfBound(MenuButtonType);
 		//ElHelper::Debug(FString("false"));
 	}
 	return FReply::Handled();

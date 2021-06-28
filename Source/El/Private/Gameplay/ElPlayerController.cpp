@@ -17,11 +17,11 @@ void AElPlayerController::BeginPlay()
 	
 	//SAssignNew(GameHUDWidget, SElGameHUDWidget);
 	
-	//GEngine->GameViewport->AddViewportWidgetForPlayer(GetLocalPlayer(),GameHUDWidget.ToSharedRef(),0);
-
 	//CurrentTouchInterface->set
 	//ActivateTouchInterface(CurrentTouchInterface);
 	GameHUDWidget=Cast<AElGameHUD>(GetHUD())->GameHUDWidget;
+	GEngine->GameViewport->AddViewportWidgetForPlayer(GetLocalPlayer(),GameHUDWidget.ToSharedRef(),0);
+
 	
 }
 

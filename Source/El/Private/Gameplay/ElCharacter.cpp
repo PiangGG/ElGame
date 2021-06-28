@@ -16,6 +16,7 @@
 #include "Prop/ControlProp.h"
 #include "Prop/LounchCharacterProp.h"
 #include "Prop/OverlapProp.h"
+#include "Sound/SoundCue.h"
 #include "UI/HUD/ElGameHUD.h"
 #include "UI/Widget/SElGameHUDWidget.h"
 #include "UI/Widget/SElUserInfoWidget.h"
@@ -26,7 +27,7 @@ AElCharacter::AElCharacter()
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	ConstructorHelpers::FObjectFinder<USkeletalMesh> theMesh(TEXT("SkeletalMesh'/Game/Import/Character/Mesh/SK_Mannequin.SK_Mannequin'"));
+	ConstructorHelpers::FObjectFinder<USkeletalMesh> theMesh(TEXT("SkeletalMesh'/Game/introduce/SCK_Casual01/Models/Premade_Characters/MESH_PC_00.MESH_PC_00'"));
 	ConstructorHelpers::FClassFinder<UAnimInstance> AnimInstance(TEXT("AnimBlueprint'/Game/Blueprints/Animation/ElCharacterAnimInstanceBP.ElCharacterAnimInstanceBP_C'"));
 	
 	GetMesh()->SetSkeletalMesh(theMesh.Object);
@@ -71,6 +72,10 @@ AElCharacter::AElCharacter()
 	
 	ParticleComp->SetTemplate(ParticleSystem);
 	ParticleComp->Deactivate();
+
+	JumpStartSoundCue=ConstructorHelpers::FObjectFinder<USoundCue>(TEXT("SoundCue'/Game/introduce/FootstepSound/Sounds/WaveFiles/Jump_Voice_Mono/Male/jump_voice_start_1_Cue.jump_voice_start_1_Cue'")).Object;
+	JumpEndSoundCue=ConstructorHelpers::FObjectFinder<USoundCue>(TEXT("SoundCue'/Game/introduce/FootstepSound/Sounds/WaveFiles/Jump_Voice_Mono/Male/jump_voice_end_1_Cue.jump_voice_end_1_Cue'")).Object;
+
 }
 
 // Called when the game starts or when spawned
@@ -155,7 +160,7 @@ void AElCharacter::Tick(float DeltaTime)
 void AElCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
-	InputComponent->BindAction("Jump", EInputEvent::IE_Pressed, this, &ACharacter::Jump);
+	InputComponent->BindAction("Jump", EInputEvent::IE_Pressed, this, &AElCharacter::Jump);
 	InputComponent->BindAction("Crouch", EInputEvent::IE_Pressed, this, &AElCharacter::CrouchEl);
 	InputComponent->BindAction("Crouch", EInputEvent::IE_Released, this, &AElCharacter::UnCrouchEl);
 
@@ -261,6 +266,20 @@ void AElCharacter::UnCrouchEl()
 {
 	//ElHelper::Debug(FString("UnCrouchEl"));
 	UnCrouch();
+}
+
+void AElCharacter::Jump()
+{
+	Super::Jump();
+	if (JumpStartSoundCue&&!GetCharacterMovement()->IsFalling())
+		UGameplayStatics::SpawnSoundAttached(JumpStartSoundCue,GetMesh(),FName("head"));
+}
+
+void AElCharacter::StopJumpingEnd()
+{
+	//Super::StopJumping();
+	if (JumpEndSoundCue)
+		UGameplayStatics::SpawnSoundAttached(JumpEndSoundCue,GetMesh(),FName("head"));
 }
 
 void AElCharacter::LeftMouseButtonDown()

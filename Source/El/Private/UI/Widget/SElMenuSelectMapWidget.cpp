@@ -108,7 +108,6 @@ void SElMenuSelectMapWidget::MenuSelectMapOnClicked(int id)
 	
 	UElGI *GI=Cast<UElGI>(UGameplayStatics::GetGameInstance(GWorld));
 	GI->SetCurrentMapID(id);
-
 	UGameplayStatics::OpenLevel(GWorld,FName("Map"+FString::FromInt(GI->GetCurrentMapID())));
 }
 

@@ -19,6 +19,6 @@ void AElMenuGameMode::BeginPlay()
 {
 	if (Cast<AElMenuPlayerController>( GetWorld()->GetFirstPlayerController()))
 	{
-		Cast<AElMenuPlayerController>( GetWorld()->GetFirstPlayerController())->ChangeControllerState(EControllerState::GameOnly);
+		Cast<AElMenuPlayerController>( GetWorld()->GetFirstPlayerController())->ChangeControllerState(EControllerState::UIOnly);
 	}
 }

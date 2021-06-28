@@ -26,6 +26,7 @@ public:
 	void Init(FText Text);
 	virtual FReply OnMouseButtonDoubleClick(const FGeometry& InMyGeometry, const FPointerEvent& InMouseEvent) override;
 	virtual FReply OnMouseButtonClick(const FGeometry& InMyGeometry, const FPointerEvent& InMouseEvent);
+	virtual FReply OnMouseButtonDown(const FGeometry& MyGeometry, const FPointerEvent& MouseEvent) override;
 	virtual FReply OnTouchEnded(const FGeometry& MyGeometry, const FPointerEvent& InTouchEvent) override;
 private:
 	//引入Sytle|获取MenuStyle

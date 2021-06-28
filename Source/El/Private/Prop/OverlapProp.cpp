@@ -6,6 +6,7 @@
 #include "Common/ElHelper.h"
 #include "Components/BoxComponent.h"
 #include "Gameplay/ElCharacter.h"
+#include "Particles/ParticleSystemComponent.h"
 
 // Sets default values
 AOverlapProp::AOverlapProp()
@@ -44,6 +45,11 @@ AOverlapProp::AOverlapProp()
 
 	StartScale3D=GetActorScale3D();
 	TargetScale3D=StartScale3D;
+
+	ParticleSystem=ConstructorHelpers::FObjectFinder<UParticleSystem>(TEXT("ParticleSystem'/Game/introduce/FXVarietyPack/Particles/P_ky_healAura.P_ky_healAura'")).Object;
+	ParticleComp=CreateDefaultSubobject<UParticleSystemComponent>(TEXT("ParticleComp"));
+	ParticleComp->SetupAttachment(BoxComp);
+	ParticleComp->SetTemplate(ParticleSystem);
 }
 
 // Called when the game starts or when spawned

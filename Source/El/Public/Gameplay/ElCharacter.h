@@ -37,6 +37,9 @@ public:
 	void CrouchEl();
 	void UnCrouchEl();
 
+	virtual void Jump() override;
+	UFUNCTION(BlueprintCallable)
+	void StopJumpingEnd();
 	void LeftMouseButtonDown();
 	void LeftMouseButtonUp();
 	bool bLeftMouseButtonDown = false;
@@ -85,6 +88,10 @@ private:
 	bool bOverlapBaseprop=false;
 
 	void GameOver();
+
+	private:
+	class USoundCue* JumpStartSoundCue;
+	class USoundCue* JumpEndSoundCue;
 };
 
 

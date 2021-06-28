@@ -31,7 +31,7 @@ void ElJsonHandle::GameSettingJsonRead(FString &Language,TArray<FString>& Langua
 		}
 	}else
 	{
-		ElHelper::Debug(FString("GameSettingFileName not can read!"));
+		
 	}
 }
 
@@ -86,6 +86,18 @@ bool ElJsonHandle::WriteFileWithJsonData(const FString& JsonStr, const FString& 
 			}else
 			{
 				ElHelper::Debug(AbsoPath+FileName+FString("保存失败"));
+			}
+		}	
+	}else
+	{
+		if (!FileName.IsEmpty())
+		{
+			//获取一下绝对路径
+			FString AbsoPath = FPaths::ProjectContentDir()+RelativePath+FileName;
+			//保存
+			if(FFileHelper::SaveStringToFile(JsonStr,*AbsoPath))
+			{
+				return true;
 			}
 		}	
 	}

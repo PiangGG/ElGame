@@ -6,6 +6,7 @@
 #include "Common/ElHelper.h"
 #include "Components/BoxComponent.h"
 #include "Gameplay/ElCharacter.h"
+#include "Particles/ParticleSystemComponent.h"
 
 // Sets default values
 ALounchCharacterProp::ALounchCharacterProp()
@@ -39,6 +40,10 @@ ALounchCharacterProp::ALounchCharacterProp()
 	StartLocation=BaseMesh->GetComponentLocation();
 	TargetLocation=StartLocation;
 
+	ParticleSystem=ConstructorHelpers::FObjectFinder<UParticleSystem>(TEXT("ParticleSystem'/Game/introduce/FXVarietyPack/Particles/P_ky_magicCircle1.P_ky_magicCircle1'")).Object;
+	ParticleComp=CreateDefaultSubobject<UParticleSystemComponent>(TEXT("ParticleComp"));
+	ParticleComp->SetupAttachment(BoxComp);
+	ParticleComp->SetTemplate(ParticleSystem);
 }
 
 void ALounchCharacterProp::OnOverlayBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
