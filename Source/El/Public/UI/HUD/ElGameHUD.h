@@ -21,4 +21,8 @@ class EL_API AElGameHUD : public AHUD
 	virtual void Tick(float DeltaSeconds) override;
 	virtual void BeginPlay() override;
 	class AElCharacter *Character;
+
+	public:
+	void ShowGameHUDWidget();
+	void HindGameHUDWidget();
 };

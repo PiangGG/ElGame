@@ -20,5 +20,5 @@ public:
 	
 	void SetCurrentMapID(int ID);
 private:
-	int CurrentMapID;
+	int CurrentMapID = 0;
 };

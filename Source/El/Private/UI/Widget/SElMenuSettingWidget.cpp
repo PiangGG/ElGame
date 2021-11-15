@@ -2,8 +2,6 @@
 
 
 #include "UI/Widget/SElMenuSettingWidget.h"
-
-#include "SEditorViewportToolBarMenu.h"
 #include "SlateOptMacros.h"
 #include "Common/ElHelper.h"
 #include "Data/ElDataHandle.h"
@@ -114,10 +112,10 @@ void SElMenuSettingWidget::Construct(const FArguments& InArgs)
 		]
 	];
 	
-	if (LanguageSetString[0])
+	/*if (LanguageSetString[0].IsValid()&&LanguageSetString.IsValidIndex(0))
 	{
 		LanguageComboBox->SetSelectedItem(LanguageSetString[0]);
-	}
+	}*/
 }
 
 void SElMenuSettingWidget::MenuButtonOnClicked(EMenuButtonType::Type type)

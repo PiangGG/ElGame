@@ -16,8 +16,6 @@ AElGMInGame::AElGMInGame()
 	PlayerControllerClass=AElPlayerController::StaticClass();
 	//PlayerStateClass
 	DefaultPawnClass=AElCharacter::StaticClass();
-
-	
 }
 
 void AElGMInGame::BeginPlay()

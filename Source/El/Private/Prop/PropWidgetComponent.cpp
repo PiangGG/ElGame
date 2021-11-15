@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "Prop/PropWidgetComponent.h"
+#include "Prop/Rotateprop/PropWidgetComponent.h"
 
 UPropWidgetComponent::UPropWidgetComponent()
 {
